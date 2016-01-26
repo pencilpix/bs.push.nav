@@ -1,0 +1,65 @@
+/* our custom mixins */
+/* ----------------- */
+
+// border-radius
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    -o-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin box-shadow($shadow) {
+    -webkit-box-shadow: $shadow;
+    -moz-box-shadow: $shadow;
+    -ms-box-shadow: $shadow;
+    -o-box-shadow: $shadow;
+    box-shadow: $shadow;
+}
+
+@mixin box-shadow-multi($shadow1, $shadow2, $shadow3) {
+    -webkit-box-shadow: $shadow1, $shadow2, $shadow3;
+    -moz-box-shadow: $shadow1, $shadow2, $shadow3;
+    -ms-box-shadow: $shadow1, $shadow2, $shadow3;
+    -o-box-shadow: $shadow1, $shadow2, $shadow3;
+    box-shadow: $shadow1, $shadow2, $shadow3;
+}
+
+@mixin text-shadow($shadow) {
+    -webkit-text-shadow: $shadow;
+    -moz-text-shadow: $shadow;
+    -ms-text-shadow: $shadow;
+    -o-text-shadow: $shadow;
+    text-shadow: $shadow;
+}
+
+@mixin text-shadow-multi($shadow1, $shadow2, $shadow3) {
+    -webkit-text-shadow: $shadow1, $shadow2, $shadow3;
+    -moz-text-shadow: $shadow1, $shadow2, $shadow3;
+    -ms-text-shadow: $shadow1, $shadow2, $shadow3;
+    -o-text-shadow: $shadow1, $shadow2, $shadow3;
+    text-shadow: $shadow1, $shadow2, $shadow3;
+}
+
+@mixin opacity($opacity) {
+   -webkit-opacity:    $opacity;
+   -moz-opacity:     $opacity;
+   opacity:       $opacity;
+}
+
+@mixin cal-line-height($fontSize, $pxLineHeight) {
+  line-height: $pxLineHeight / $fontSize;
+}
+
+@mixin multi-ellipsis($height, $width, $lines){
+  display: block;
+  display: -webkit-box;
+  max-height: $height;
+  max-width: $width;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
