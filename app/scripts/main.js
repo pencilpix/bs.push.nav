@@ -21,6 +21,7 @@
                     typeClass: (menuType) ? menuType : 'push',
                     direction: (menuDir) ? menuDir : 'left',
                     targetsList: (targets) ? targets.split(' ') : ['#bsPushNav'],
+                    templates: {}
                   };
 
   // define the plugin constructor
@@ -35,6 +36,21 @@
 
   Plugin.prototype.init = function(){
     // do the logic
+    this.getLists.call(this);
+  };
+
+  Plugin.prototype.getLists = function() {
+    // get the template of each list and its parent.
+    var templates = {};
+    var lists = this.options.targetsList;
+    for (var li in lists){
+      templates[lists[li].replace('#', '')] = {
+        parent: '.' + $(lists[li]).parent().attr('class'),
+        template: $(lists[li]).clone()
+      };
+    }
+
+    this.options.templates = templates;
   };
 
   Plugin.prototype.show = function(){
