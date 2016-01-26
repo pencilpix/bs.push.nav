@@ -1,3 +1,10 @@
+/* ========================================================= *
+ * Plugin: bs.push.nav v0.0.0
+ * Author: Mohamed Hassan 'pencilpix'.
+ * Author Url: mohamedhassan.me
+ * License: under MIT
+ * ========================================================= */
+
 ;(function($, window, document, undefined){
   'use strict';
   // define the plugin name and the default options
