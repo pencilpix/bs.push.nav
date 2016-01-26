@@ -1,5 +1,10 @@
 {
   "name": "bs-push-nav",
+  "description": "jquery plugin that convert bootstrap navigation into push/slide menu on mobile",
+  "main": [
+    "dist/scripts/jquery.bs.push.nav.min.js",
+    "dist/styles/jquery.bs.push.nav.min.css"
+  ],
   "private": true,
   "dependencies": {
     "jquery": "~2.1.1",
