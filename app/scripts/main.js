@@ -8,10 +8,20 @@
 ;(function($, window, document, undefined){
   'use strict';
   // define the plugin name and the default options
-  var pluginName = 'bsPushNav';
-  var defaults = {
-
-      };
+  var $menuBtn    = $('[data-toggle="bsPushNav"]');
+  var breakpoint  = $menuBtn.data('breakpoint');
+  var menuDir     = $menuBtn.data('direction');
+  var menuType    = $menuBtn.data('type');
+  var backdrop    = '<div class="bsPushNav-backdrop"></div>';
+  var targets     = $menuBtn.data('target');
+  var pluginName  = 'bsPushNav';
+  var defaults    = {
+                    breakpoint: (breakpoint) ? breakpoint : 768,
+                    activeClass: '.open',
+                    typeClass: (menuType) ? menuType : 'push',
+                    direction: (menuDir) ? menuDir : 'left',
+                    targetsList: (targets) ? targets.split(' ') : ['#bsPushNav'],
+                  };
 
   // define the plugin constructor
   function Plugin(element, options){
@@ -79,5 +89,5 @@
 
       return returns !== undefined ? returns : this;
     }
-    };
+  };
 })(jQuery, window, document);
