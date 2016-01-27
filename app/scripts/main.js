@@ -8,7 +8,7 @@
 ;(function($, window, document, undefined){
   'use strict';
   // define the plugin name and the default options
-  var resizeDelay; 
+  var resizeDelay;
   var $menuBtn    = $('[data-toggle="bsPushNav"]');
   var breakpoint  = $menuBtn.data('breakpoint');
   var menuDir     = $menuBtn.data('direction');
@@ -40,8 +40,9 @@
     this.getLists.call(this);
     this.bindResize.call(this);
     if(this.checkWidth.call(this)) {
-      if(this.options.typeClass === 'push')
+      if(this.options.typeClass === 'push'){
         $('body').addClass('anim');
+      }
       this.addTemp.call(this);
     }
   };
@@ -73,9 +74,10 @@
       $(lists[li]).remove();
     }
 
-    if ($('#bsPushNav').length === 0)
+    if ($('#bsPushNav').length === 0){
       $('.navbar').after(menuWrapper).next()
-                  .addClass(this.options.direction + ' ' +this.options.typeClass);
+                  .addClass(this.options.direction + ' ' + this.options.typeClass);
+    }
 
     for (var temp in temps){
       $('#bsPushNav').append(temps[temp].template);
@@ -114,7 +116,7 @@
 
   Plugin.prototype.bindClick = function(){
     var plugin = this;
-    $(document).on('click' + '.' + plugin._name, plugin.element , function(e){
+    $(document).on('click' + '.' + plugin._name, plugin.element, function(e){
       e.preventDefault();
       var target = $(e.target);
       // fire an event before show
@@ -131,10 +133,11 @@
     $(window).on('resize' + '.' + plugin._name, function(){
       clearTimeout(resizeDelay);
       resizeDelay = setTimeout(function(){
-        if(plugin.checkWidth.call(plugin))
+        if(plugin.checkWidth.call(plugin)){
           plugin.addTemp.call(plugin);
-        else
+        } else {
           plugin.removeTemp.call(plugin);
+        }
       }, 250);
     });
   };
