@@ -9,13 +9,14 @@
   'use strict';
   // define the plugin name and the default options
   var resizeDelay;
+  var randomNo = randomIdNo();
   var $menuBtn    = $('[data-toggle="bsPushNav"]');
   var breakpoint  = $menuBtn.data('breakpoint');
   var menuDir     = $menuBtn.data('direction');
   var menuType    = $menuBtn.data('type');
   var targets     = $menuBtn.data('target');
   var backdrop    = '<div class="bsPushNav-backdrop"></div>';
-  var menuWrapper = '<nav id="bsPushNav" class="bsPushNav"></nav>';
+  var menuWrapper = '<nav id="bsPushNav' + randomNo +'" class="bsPushNav"></nav>';
   var pluginName  = 'bsPushNav';
   var defaults    = {
                     breakpoint: (breakpoint) ? breakpoint : 768,
@@ -33,6 +34,11 @@
     this.options = $.extend({}, defaults, options);
 
     this.init();
+  }
+
+  // random ids
+  function randomIdNo() {
+    return  Math.floor(Math.random() * 1000);
   }
 
   Plugin.prototype.init = function(){
@@ -74,13 +80,13 @@
       $(lists[li]).remove();
     }
 
-    if ($('#bsPushNav').length === 0){
+    if ($('#bsPushNav' + randomNo).length === 0){
       $('.navbar').after(menuWrapper).next()
                   .addClass(this.options.direction + ' ' + this.options.typeClass);
     }
 
     for (var temp in temps){
-      $('#bsPushNav').append(temps[temp].template);
+      $('#bsPushNav' + randomNo).append(temps[temp].template);
     }
 
     this.bindClick.call(this);
@@ -101,7 +107,7 @@
 
   Plugin.prototype.show = function(){
     // public method that fires some event
-    $('#bsPushNav').addClass('active');
+    $('#bsPushNav' + randomNo).addClass('active');
     $('body').addClass('pn-' + this.options.typeClass + '-' + this.options.direction);
     if($('.bsPushNav-backdrop').length === 0){
       $('body').append(backdrop);
@@ -109,7 +115,7 @@
   };
 
   Plugin.prototype.hide = function(){
-    $('#bsPushNav').removeClass('active');
+    $('#bsPushNav' + randomNo).removeClass('active');
     $('body').removeClass('pn-' + this.options.typeClass + '-' + this.options.direction);
     $('.bsPushNav-backdrop').remove();
   };
