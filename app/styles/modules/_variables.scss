@@ -29,3 +29,8 @@ $screen-lg-desktop:     $screen-lg-min;
 $screen-xs-max:         ($screen-sm-min - 1);
 $screen-sm-max:         ($screen-md-min - 1);
 $screen-md-max:         ($screen-lg-min - 1);
+
+
+$menuWidth: 250px;
+$dropIndex: 1041;
+$menuIndex: $dropIndex + 1;
