@@ -5,7 +5,6 @@
     "dist/scripts/jquery.bs.push.nav.min.js",
     "dist/styles/jquery.bs.push.nav.min.css"
   ],
-  "private": true,
   "dependencies": {
     "jquery": "~2.1.1",
     "modernizr": "~2.8.1",
@@ -15,5 +14,28 @@
   "devDependencies": {
     "chai": "~3.4.2",
     "mocha": "~2.3.4"
-  }
+  },
+  "version": "0.0.1",
+  "private": false,
+  "homepage": "https://github.com/pencilpix/bs.push.nav",
+  "authors": [
+    "Mohamed Hassan <http://mohamedhassan.me>"
+  ],
+  "moduleType": [],
+  "keywords": [
+    "bs-push-nav",
+    "push-nav",
+    "slide",
+    "menu",
+    "bootstrap",
+    "menu"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
 }

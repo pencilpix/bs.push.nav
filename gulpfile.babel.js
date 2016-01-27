@@ -38,6 +38,18 @@ function lint(files, options) {
     return gulp.src(files)
       .pipe(reload({stream: true, once: true}))
       .pipe($.eslint(options))
+      .pipe($.eslint({
+        'rules': {
+          'no-extra-semi': 1,
+          'no-shadow-restricted-names': 1,
+          'no-multi-spaces': 1,
+          'no-underscore-dangle': 1
+        },
+        globals: {
+            'jQuery':false,
+            '$':true
+        }
+      }))
       .pipe($.eslint.format())
       .pipe($.if(!browserSync.active, $.eslint.failAfterError()));
   };
