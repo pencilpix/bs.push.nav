@@ -121,7 +121,9 @@
       var target = $(e.target);
       // fire an event before show
       if(target.is(plugin.element) || target.is($(plugin.element).find('*'))) {
-        plugin.show();
+        if(plugin.checkWidth()){
+          plugin.show();
+        }
       } else {
         plugin.hide();
       }
