@@ -42,7 +42,7 @@
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="">
+        <div class="menu-wrapper">
           <ul class="nav navbar-nav" id="menu1">
             <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
             <li><a href="#">Link</a></li>
@@ -97,5 +97,16 @@
     <!-- build:js scripts/jquery.bs.push.nav.min.js -->
     <script src="scripts/main.js"></script>
     <!-- endbuild -->
+
+    <script>
+      // automaticly init plugin if btn found
+      $(document).ready(function() {
+        $('[data-toggle="bsPushNav"]').bsPushNav({
+          breakpoint: 900,
+          direction: 'left',
+          typeClass: 'slide'
+        });
+      });
+    </script>
   </body>
 </html>
