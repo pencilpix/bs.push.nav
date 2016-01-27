@@ -14,5 +14,20 @@
   "devDependencies": {
     "chai": "~3.4.2",
     "mocha": "~2.3.4"
-  }
+  },
+  "version": "0.0.1",
+  "homepage": "https://github.com/pencilpix/bs.push.nav",
+  "authors": [
+    "Mohamed Hassan <http://mohamedhassan.me>"
+  ],
+  "moduleType": [],
+  "keywords": [
+    "bs-push-nav",
+    "push-nav",
+    "slide",
+    "menu",
+    "bootstrap",
+    "menu"
+  ],
+  "license": "MIT"
 }
