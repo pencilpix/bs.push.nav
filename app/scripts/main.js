@@ -100,7 +100,8 @@
 
   Plugin.prototype.removeTemp = function() {
     var temps = this.options.templates;
-    $('.bsPushNav-backdrop, #bsPushNav' + randomNo).remove();
+    var $element = $(this.element);
+    $('.bsPushNav-backdrop, ' + $element.data('control')).remove();
     $('body').removeClass('pn-' + this.options.typeClass + '-' + this.options.direction);
 
     for(var temp in temps){
@@ -139,7 +140,6 @@
     $(document).on('click' + '.' + plugin._name, function(e){
       e.preventDefault();
       var target = $(e.target);
-      // fire an event before show
       if(target.is(btn) || target.is($(btn).find('*'))) {
         if(plugin.checkWidth()){
           plugin.show();
