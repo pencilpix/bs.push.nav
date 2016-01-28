@@ -63,9 +63,9 @@
     var templates = {};
     var lists = this.options.targetsList;
     for (var li in lists){
+      $(lists[li]).parent().addClass('parent-' + randomNo + '-' + lists[li].replace('#', ''));
       templates[lists[li].replace('#', '')] = {
-        parent: '.' + $(lists[li]).parent().attr('class'),
-        id: templates[lists[li]],
+        parent: '.' + $(lists[li]).parent().attr('class').replace(/ /g, '.'),
         template: $(lists[li]).clone()
       };
     }
