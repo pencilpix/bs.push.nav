@@ -138,8 +138,8 @@
     var plugin = this;
     var btn = '#bsPushNav' + randomNo + '_btn';
     $(document).on('click' + '.' + plugin._name, function(e){
-      e.preventDefault();
       var target = $(e.target);
+      if(target.is(btn)) e.preventDefault();
       if(target.is(btn) || target.is($(btn).find('*'))) {
         if(plugin.checkWidth()){
           plugin.show();
