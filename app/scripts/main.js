@@ -9,20 +9,19 @@
   'use strict';
   // define the plugin name and the default options
   var resizeDelay;
-  var randomNo = randomIdNo();
+  var randomNo;
+  var menuWrapper;
   var $menuBtn    = $('[data-toggle="bsPushNav"]');
   var breakpoint  = $menuBtn.data('breakpoint');
   var menuDir     = $menuBtn.data('direction');
   var menuType    = $menuBtn.data('type');
-  var targets     = $menuBtn.data('target');
   var backdrop    = '<div class="bsPushNav-backdrop"></div>';
-  var menuWrapper = '<nav id="bsPushNav' + randomNo +'" class="bsPushNav"></nav>';
   var pluginName  = 'bsPushNav';
   var defaults    = {
                     breakpoint: (breakpoint) ? breakpoint : 768,
                     typeClass: (menuType) ? menuType : 'slide',
                     direction: (menuDir) ? menuDir : 'left',
-                    targetsList: (targets) ? targets.split(' ') : ['#bsPushNav'],
+                    targetsList: [],
                     templates: {}
                   };
 
@@ -42,6 +41,12 @@
   }
 
   Plugin.prototype.init = function(){
+    randomNo = this.randomNo =randomIdNo();
+    this.isShown = false;
+    menuWrapper = '<nav id="bsPushNav' + randomNo +'" class="bsPushNav"></nav>';
+    $(this.element).attr('id','bsPushNav' + randomNo + '_btn')
+                  .data('control', '#bsPushNav' + randomNo);
+    this.options.targetsList = (this.options.targetsList.length === 0) ? $(this.element).data('target').split(' ') : this.options.targetsList;
     // do the logic
     this.getLists.call(this);
     this.bindResize.call(this);
@@ -76,17 +81,18 @@
   Plugin.prototype.addTemp = function() {
     var temps = this.options.templates;
     var lists = this.options.targetsList;
+    var $element = $(this.element);
     for(var li in lists) {
       $(lists[li]).remove();
     }
 
-    if ($('#bsPushNav' + randomNo).length === 0){
-      $('.navbar').after(menuWrapper).next()
-                  .addClass(this.options.direction + ' ' + this.options.typeClass);
+    if ($($element.data('control')).length === 0){
+      $('body').prepend(menuWrapper);
     }
+    $($element.data('control')).addClass(this.options.direction + ' ' + this.options.typeClass);
 
     for (var temp in temps){
-      $('#bsPushNav' + randomNo).append(temps[temp].template);
+      $($element.data('control')).append(temps[temp].template);
     }
 
     this.bindClick.call(this);
@@ -94,7 +100,7 @@
 
   Plugin.prototype.removeTemp = function() {
     var temps = this.options.templates;
-    $('.bsPushNav-backdrop, #bsPushNav').remove();
+    $('.bsPushNav-backdrop, #bsPushNav' + randomNo).remove();
     $('body').removeClass('pn-' + this.options.typeClass + '-' + this.options.direction);
 
     for(var temp in temps){
@@ -106,31 +112,39 @@
   };
 
   Plugin.prototype.show = function(){
-    // public method that fires some event
-    $('#bsPushNav' + randomNo).addClass('active');
-    $('body').addClass('pn-' + this.options.typeClass + '-' + this.options.direction);
-    if($('.bsPushNav-backdrop').length === 0){
-      $('body').append(backdrop);
+    var $element = $(this.element);
+    if(!this.isShown){
+      $($element.data('control')).addClass('active');
+      $('body').addClass('pn-' + this.options.typeClass + '-' + this.options.direction);
+      if($('.bsPushNav-backdrop').length === 0){
+        $('body').append(backdrop);
+      }
+
+      this.isShown = true;
     }
   };
 
   Plugin.prototype.hide = function(){
-    $('#bsPushNav' + randomNo).removeClass('active');
+    var $element = $(this.element);
+    $($element.data('control')).removeClass('active');
     $('body').removeClass('pn-' + this.options.typeClass + '-' + this.options.direction);
     $('.bsPushNav-backdrop').remove();
+
+    this.isShown = false;
   };
 
   Plugin.prototype.bindClick = function(){
     var plugin = this;
-    $(document).on('click' + '.' + plugin._name, plugin.element, function(e){
+    var btn = '#bsPushNav' + randomNo + '_btn';
+    $(document).on('click' + '.' + plugin._name, function(e){
       e.preventDefault();
       var target = $(e.target);
       // fire an event before show
-      if(target.is(plugin.element) || target.is($(plugin.element).find('*'))) {
+      if(target.is(btn) || target.is($(btn).find('*'))) {
         if(plugin.checkWidth()){
           plugin.show();
         }
-      } else {
+      } else if(plugin.isShown) {
         plugin.hide();
       }
     });
