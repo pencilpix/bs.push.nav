@@ -164,6 +164,12 @@
     });
   };
 
+  Plugin.prototype.triggerEvent = function(eventName, elAr){
+    for (var el in elAr){
+      elAr[el].trigger(eventName);
+    }
+  };
+
   Plugin.prototype.destroy = function(){
     // the logic of destroy the plugin
     this.unbindEvents();
