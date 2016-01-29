@@ -37,6 +37,9 @@
   // to hold the structure of each menu wrapper
   Plugin.menuWrapper = '';
 
+  // to hold if menu enabled or disabled
+  Plugin.enabled = false;
+
   // random ids
   function randomIdNo() {
     return  Math.floor(Math.random() * 1000);
@@ -104,6 +107,11 @@
     for (var temp in temps){
       $($element.data('control')).append(temps[temp].template);
     }
+
+    if(!this.enabled){
+      this.enabled = true;
+      this.triggerEvent('menuEnabled', [$element, $($element.data('control'))]);
+    }
   };
 
   Plugin.prototype.removeTemp = function() {
@@ -118,6 +126,10 @@
       }
     }
 
+    if(this.enabled){
+      this.enabled = false;
+      this.triggerEvent('menuDisabled', [$element, $($element.data('control'))]);
+    }
   };
 
   Plugin.prototype.show = function(){
@@ -130,6 +142,7 @@
       }
 
       this.isShown = true;
+      this.triggerEvent('shown', [$element, $($element.data('control'))]);
     }
   };
 
@@ -140,6 +153,7 @@
     $('.bsPushNav-backdrop').remove();
 
     this.isShown = false;
+    this.triggerEvent('hidden', [$element, $($element.data('control'))]);
   };
 
   Plugin.prototype.bindClick = function(){
@@ -150,9 +164,11 @@
       if(target.is(btn)) e.preventDefault();
       if(target.is(btn) || target.is($(btn).find('*'))) {
         if(plugin.checkWidth()){
+          plugin.triggerEvent('beforeShow', [$(btn), $($(btn).data('control'))]);
           plugin.show();
         }
       } else if(plugin.isShown) {
+        plugin.triggerEvent('beforeHide', [$(btn), $($(btn).data('control'))]);
         plugin.hide();
       }
     });
