@@ -57,6 +57,7 @@
       }
       this.addTemp.call(this);
     }
+    this.bindClick.call(this);
     this.handleResize.call(this);
   };
 
@@ -96,8 +97,6 @@
     for (var temp in temps){
       $($element.data('control')).append(temps[temp].template);
     }
-
-    this.bindClick.call(this);
   };
 
   Plugin.prototype.removeTemp = function() {
