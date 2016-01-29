@@ -194,6 +194,31 @@
           direction: 'right',
           typeClass: 'slide'
         });
+
+
+        $(document).on('menuEnabled', '.navbar-toggle.left',function(e){
+          alert('menuEnabled');
+        });
+
+        $(document).on('menuDisabled', '.navbar-toggle.left',function(e){
+          alert('menuDisabled');
+        });
+
+        $(document).on('beforeShow', '.navbar-toggle.left',function(e){
+          alert('beforeShow');
+        });
+
+        $(document).on('shown', '.navbar-toggle.left',function(e){
+          alert('shown');
+        });
+
+        $(document).on('beforeHide', '.navbar-toggle.left',function(e){
+          alert('beforeHide');
+        });
+
+        $(document).on('hidden', '.navbar-toggle.left',function(e){
+          alert('hidden');
+        });
       });
     </script>
   </body>
