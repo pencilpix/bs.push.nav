@@ -57,6 +57,7 @@
       }
       this.addTemp.call(this);
     }
+    this.handleResize.call(this);
   };
 
   Plugin.prototype.getLists = function() {
@@ -162,6 +163,19 @@
       resizeDelay = setTimeout(function(){
         plugin.triggerEvent('windowResize', [$('[data-toggle="' + plugin._name +'"]')]);
       }, 250);
+    });
+  };
+
+  // when window is resized handle the template
+  Plugin.prototype.handleResize = function() {
+    var plugin = this;
+    var btn = '#bsPushNav' + randomNo + '_btn';
+    $(btn).on('windowResize', plugin, function(){
+      if(plugin.checkWidth()){
+        plugin.addTemp.call(plugin);
+      } else {
+        plugin.removeTemp.call(plugin);
+      }
     });
   };
 
