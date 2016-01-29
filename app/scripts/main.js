@@ -21,7 +21,8 @@
                     typeClass: (menuType) ? menuType : 'slide',
                     direction: (menuDir) ? menuDir : 'left',
                     targetsList: [],
-                    templates: {}
+                    templates: {},
+                    bodyWrapper: '#wrapper'
                   };
 
   // define the plugin constructor
@@ -91,8 +92,12 @@
       $(lists[li]).remove();
     }
 
+    if($(this.options.bodyWrapper).length === 0){
+      $('body').contents().not('script').wrapAll('<div id="' + this.options.bodyWrapper.replace('#', '') + '"></div>');
+    }
+
     if ($($element.data('control')).length === 0){
-      $('body').prepend(this.menuWrapper);
+      $(this.options.bodyWrapper).prepend(this.menuWrapper);
     }
     $($element.data('control')).addClass(this.options.direction + ' ' + this.options.typeClass);
 
@@ -121,7 +126,7 @@
       $($element.data('control')).addClass('active');
       $('body').addClass('pn-' + this.options.typeClass + '-' + this.options.direction);
       if($('.bsPushNav-backdrop').length === 0){
-        $('body').append(backdrop);
+        $(this.options.bodyWrapper).append(backdrop);
       }
 
       this.isShown = true;
