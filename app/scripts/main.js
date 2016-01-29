@@ -42,12 +42,14 @@
   }
 
   Plugin.prototype.init = function(){
+    var $element = $(this.element);
+    var lists = this.options.targetsList;
     randomNo = this.randomNo =randomIdNo();
     this.isShown = false;
     this.menuWrapper = '<nav id="bsPushNav' + randomNo +'" class="bsPushNav"></nav>';
-    $(this.element).attr('id','bsPushNav' + randomNo + '_btn')
+    $element.attr('id','bsPushNav' + randomNo + '_btn')
                   .data('control', '#bsPushNav' + randomNo);
-    this.options.targetsList = (this.options.targetsList.length === 0) ? $(this.element).data('target').split(' ') : this.options.targetsList;
+    this.options.targetsList = (lists.length === 0) ? $element.data('target').split(' ') : lists;
     // do the logic
     this.getLists.call(this);
     this.bindResize.call(this);
