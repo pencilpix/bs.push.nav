@@ -64,12 +64,19 @@ bs.push.nav has many options that makes you control your menus
 
 Event           | Description                                                             
 --------------- | ------------------------------------------------------------------------
-triggered       | that event will be triggered when the window hit the breakpoint 
-fired           | triggerd when window is resized and break the breakpoint.
+menuEnabled     | that event will be triggered when the window hit the breakpoint and when template is ready
+menuDisabled    | when window is resized and break the breakpoint and the template reverted to origin
 beforeShow      | triggered when the button is clicked just before the menu is shown
 shown           | triggered when the menu is shown
 beforeHide      | triggered just before the menu is hidden
-Hidden          | triggered after hiding the menu
+hidden          | triggered after hiding the menu
+
+using event:
+```
+  $(document).on('beforeShow', '.btn', function(e){
+    // do some stuff
+  });
+```
 
 #### Methods
 
@@ -81,7 +88,6 @@ Method           | Description
 
 #### Upcomming features
   * support (RTL) for the menus.
-  * support multi-push/slide menu at the same page.
   * Enable required Events that should be triggered at each process.
 
 
