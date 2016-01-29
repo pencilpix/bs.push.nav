@@ -10,7 +10,6 @@
   // define the plugin name and the default options
   var resizeDelay;
   var randomNo;
-  var menuWrapper;
   var $menuBtn    = $('[data-toggle="bsPushNav"]');
   var breakpoint  = $menuBtn.data('breakpoint');
   var menuDir     = $menuBtn.data('direction');
@@ -34,6 +33,8 @@
 
     this.init();
   }
+  // to hold the structure of each menu wrapper
+  Plugin.menuWrapper = '';
 
   // random ids
   function randomIdNo() {
@@ -43,7 +44,7 @@
   Plugin.prototype.init = function(){
     randomNo = this.randomNo =randomIdNo();
     this.isShown = false;
-    menuWrapper = '<nav id="bsPushNav' + randomNo +'" class="bsPushNav"></nav>';
+    this.menuWrapper = '<nav id="bsPushNav' + randomNo +'" class="bsPushNav"></nav>';
     $(this.element).attr('id','bsPushNav' + randomNo + '_btn')
                   .data('control', '#bsPushNav' + randomNo);
     this.options.targetsList = (this.options.targetsList.length === 0) ? $(this.element).data('target').split(' ') : this.options.targetsList;
@@ -87,7 +88,7 @@
     }
 
     if ($($element.data('control')).length === 0){
-      $('body').prepend(menuWrapper);
+      $('body').prepend(this.menuWrapper);
     }
     $($element.data('control')).addClass(this.options.direction + ' ' + this.options.typeClass);
 
