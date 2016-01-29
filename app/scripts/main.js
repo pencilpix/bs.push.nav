@@ -153,14 +153,14 @@
 
   Plugin.prototype.bindResize = function(){
     var plugin = this;
-    $(window).on('resize' + '.' + plugin._name, function(){
+    var $element = $(plugin.element);
+    var dataSelector = $element.data('toggle');
+
+    if(!dataSelector || dataSelector !== plugin._name) $element.data('toggle', plugin._name);
+    $(window).on('resize' + '.' + plugin._name, plugin.element, function(){
       clearTimeout(resizeDelay);
       resizeDelay = setTimeout(function(){
-        if(plugin.checkWidth.call(plugin)){
-          plugin.addTemp.call(plugin);
-        } else {
-          plugin.removeTemp.call(plugin);
-        }
+        plugin.triggerEvent('windowResize', [$('[data-toggle="' + plugin._name +'"]')]);
       }, 250);
     });
   };
