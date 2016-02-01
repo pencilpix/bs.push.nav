@@ -1,19 +1,23 @@
 html{
   height: 100%;
   width: 100%;
-  overflow-x: hidden;
 }
-body.pn-push-right, 
-body.pn-push-left,{
+body.anim{
   position: relative;
   min-height: 100%;
 }
-.anim{
+#wrapper{
+  position: relative;
+}
+.anim #wrapper{
   @include transform(translateX(0));
   @include transition(all .3s ease-in-out);
 }
-body.pn-slide-left,
-body.pn-slide-left{
+
+.pn-slide-left,
+.pn-slide-right,
+.pn-push-left,
+.pn-push-right {
   overflow: hidden;
 }
 
@@ -57,10 +61,10 @@ body.pn-slide-left{
     @include transform(translateX(0));}
 }
 
-.pn-push-left{
+.pn-push-left #wrapper{
     @include transform(translateX($menuWidth));
 }
 
-.pn-push-right{
+.pn-push-right #wrapper{
     @include transform(translateX(-$menuWidth));
 }

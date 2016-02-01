@@ -1,0 +1,29 @@
+/**********************************************************************
+ * RTL for bs.push.nav jquery plugin
+ * make sure that body has class rtl
+ **********************************************************************/
+
+ .rtl{
+
+  .bsPushNav{
+    &.left{
+      left: auto;
+      right: 0;
+      @include transform(translateX($menuWidth));}
+
+    &.right{
+      right: auto;
+      left: 0;
+      @include transform(translateX(-$menuWidth));}
+  }
+
+  &.pn-push-left #wrapper{
+      @include transform(translateX(-$menuWidth));
+  }
+
+  &.pn-push-right #wrapper{
+      @include transform(translateX($menuWidth));
+  }
+
+
+ }
