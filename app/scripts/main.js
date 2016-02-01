@@ -48,10 +48,10 @@
   Plugin.prototype.init = function(){
     var $element = $(this.element);
     var lists = this.options.targetsList;
-    randomNo = this.randomNo =randomIdNo();
+    randomNo = this.randomNo = randomIdNo();
     this.isShown = false;
-    this.menuWrapper = '<nav id="bsPushNav' + randomNo +'" class="bsPushNav"></nav>';
-    $element.attr('id','bsPushNav' + randomNo + '_btn')
+    this.menuWrapper = '<nav id="bsPushNav' + randomNo + '" class="bsPushNav"></nav>';
+    $element.attr('id', 'bsPushNav' + randomNo + '_btn')
                   .data('control', '#bsPushNav' + randomNo);
     this.options.targetsList = (lists.length === 0) ? $element.data('target').split(' ') : lists;
     // do the logic
@@ -162,7 +162,7 @@
     var selector =  '#' + $(plugin.element).attr('id') + ', .bsPushNav-backdrop';
     $(document).on('click' + '.' + plugin._name, selector, function(e){
       var target = $(e.target);
-      if(target.is(btn)) e.preventDefault();
+      if(target.is(btn)) { e.preventDefault(); }
       if(target.is(btn) || target.is($(btn).find('*'))) {
         if(plugin.checkWidth()){
           plugin.triggerEvent('beforeShow', [$(btn), $($(btn).data('control'))]);
@@ -180,11 +180,11 @@
     var $element = $(plugin.element);
     var dataSelector = $element.data('toggle');
 
-    if(!dataSelector || dataSelector !== plugin._name) $element.data('toggle', plugin._name);
+    if(!dataSelector || dataSelector !== plugin._name) { $element.data('toggle', plugin._name); }
     $(window).on('resize' + '.' + plugin._name, function(){
       clearTimeout(resizeDelay);
       resizeDelay = setTimeout(function(){
-        plugin.triggerEvent('windowResize', [$('[data-toggle="' + plugin._name +'"]')]);
+        plugin.triggerEvent('windowResize', [$('[data-toggle="' + plugin._name + '"]')]);
       }, 250);
     });
   };
