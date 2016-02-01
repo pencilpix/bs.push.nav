@@ -159,7 +159,8 @@
   Plugin.prototype.bindClick = function(){
     var plugin = this;
     var btn = '#bsPushNav' + randomNo + '_btn';
-    $(document).on('click' + '.' + plugin._name, function(e){
+    var selector =  '#' + $(plugin.element).attr('id') + ', .bsPushNav-backdrop';
+    $(document).on('click' + '.' + plugin._name, selector, function(e){
       var target = $(e.target);
       if(target.is(btn)) e.preventDefault();
       if(target.is(btn) || target.is($(btn).find('*'))) {
@@ -180,7 +181,7 @@
     var dataSelector = $element.data('toggle');
 
     if(!dataSelector || dataSelector !== plugin._name) $element.data('toggle', plugin._name);
-    $(window).on('resize' + '.' + plugin._name, plugin.element, function(){
+    $(window).on('resize' + '.' + plugin._name, function(){
       clearTimeout(resizeDelay);
       resizeDelay = setTimeout(function(){
         plugin.triggerEvent('windowResize', [$('[data-toggle="' + plugin._name +'"]')]);
@@ -192,7 +193,7 @@
   Plugin.prototype.handleResize = function() {
     var plugin = this;
     var btn = '#bsPushNav' + randomNo + '_btn';
-    $(btn).on('windowResize', plugin, function(){
+    $(btn).on('windowResize' + '.' + plugin._name, function(){
       if(plugin.checkWidth()){
         plugin.addTemp.call(plugin);
       } else {
@@ -209,13 +210,17 @@
 
   Plugin.prototype.destroy = function(){
     // the logic of destroy the plugin
+    this.removeTemp.call(this);
     this.unbindEvents();
     $(this.element).removeData();
   };
 
   Plugin.prototype.unbindEvents = function() {
       // unbind events of the element
-      $(this.element).off('.' + this._name);
+      var plugin = this;
+      var selector = $(plugin.element).attr('id') + ', .bsPushNav-backdrop';
+      $(document).off('.' + plugin._name, '#' + selector);
+      $(this.element).off('.' + plugin._name);
   };
 
 
