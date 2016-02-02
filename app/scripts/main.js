@@ -53,10 +53,12 @@
     // do the logic
     this.getLists.call(this);
     this.bindResize.call(this);
+
+    if(this.options.typeClass === 'push'){
+      $('body').addClass('anim');
+    }
+
     if(this.checkWidth.call(this)) {
-      if(this.options.typeClass === 'push'){
-        $('body').addClass('anim');
-      }
       this.addTemp.call(this);
     }
     this.bindClick.call(this);
