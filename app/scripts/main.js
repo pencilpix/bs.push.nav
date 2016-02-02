@@ -119,9 +119,8 @@
     var $element = $(this.element);
     $('.bsPushNav-backdrop, ' + $element.data('control')).remove();
     $('body').removeClass('pn-' + this.options.typeClass + '-' + this.options.direction);
-
     for(var temp in temps){
-      if($(temps[temp].id).length === 0){
+      if($('#' + temp).length === 0){
         $(temps[temp].parent).append(temps[temp].template);
       }
     }
