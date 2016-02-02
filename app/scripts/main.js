@@ -249,4 +249,21 @@
       return returns !== undefined ? returns : this;
     }
   };
+
+  // call the plugin on data attributes
+  $(document).ready(function() {
+    var $menuBtn = $('[data-toggle="bsPushNav"]');
+    $menuBtn.each(function(){
+      var $self = $(this);
+      var mOpt = {};
+      // set options
+      if($self.data('target')) { mOpt.targetsList = $self.data('target').split(' '); }
+      if($self.data('direction')) {mOpt.direction = $self.data('direction'); }
+      if($self.data('breakpoint')) {mOpt.breakpoint = $self.data('breakpoint'); }
+      if($self.data('type')) {mOpt.typeClass = $self.data('type'); }
+      if($self.data('wrapper')) {mOpt.bodyWrapper = $self.data('wrapper'); }
+
+      $self.bsPushNav(mOpt);
+    });
+  });
 })(jQuery, window, document);
