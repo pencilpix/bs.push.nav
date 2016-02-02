@@ -10,16 +10,12 @@
   // define the plugin name and the default options
   var resizeDelay;
   var randomNo;
-  var $menuBtn    = $('[data-toggle="bsPushNav"]');
-  var breakpoint  = $menuBtn.data('breakpoint');
-  var menuDir     = $menuBtn.data('direction');
-  var menuType    = $menuBtn.data('type');
   var backdrop    = '<div class="bsPushNav-backdrop"></div>';
   var pluginName  = 'bsPushNav';
   var defaults    = {
-                    breakpoint: (breakpoint) ? breakpoint : 768,
-                    typeClass: (menuType) ? menuType : 'slide',
-                    direction: (menuDir) ? menuDir : 'left',
+                    breakpoint: 768,
+                    typeClass: 'slide',
+                    direction: 'left',
                     targetsList: [],
                     templates: {},
                     bodyWrapper: '#wrapper'
