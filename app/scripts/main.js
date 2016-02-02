@@ -13,13 +13,13 @@
   var backdrop    = '<div class="bsPushNav-backdrop"></div>';
   var pluginName  = 'bsPushNav';
   var defaults    = {
-                    breakpoint: 768,
-                    typeClass: 'slide',
-                    direction: 'left',
-                    targetsList: [],
-                    templates: {},
-                    bodyWrapper: '#wrapper'
-                  };
+                      breakpoint: 768,
+                      typeClass: 'slide',
+                      direction: 'left',
+                      targetsList: [],
+                      templates: {},
+                      bodyWrapper: '#wrapper'
+                    };
 
   // define the plugin constructor
   function Plugin(element, options){
