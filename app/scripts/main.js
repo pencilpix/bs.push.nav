@@ -1,5 +1,5 @@
 /* ========================================================= *
- * Plugin: bs.push.nav v0.0.4
+ * Plugin: bs.push.nav v0.0.5
  * Author: Mohamed Hassan 'pencilpix'.
  * Author Url: mohamedhassan.me
  * License: under MIT
