@@ -1,5 +1,5 @@
 /* ========================================================= *
- * Plugin: bs.push.nav v0.0.4
+ * Plugin: bs.push.nav v0.0.5
  * Author: Mohamed Hassan 'pencilpix'.
  * Author Url: mohamedhassan.me
  * License: under MIT
@@ -10,20 +10,16 @@
   // define the plugin name and the default options
   var resizeDelay;
   var randomNo;
-  var $menuBtn    = $('[data-toggle="bsPushNav"]');
-  var breakpoint  = $menuBtn.data('breakpoint');
-  var menuDir     = $menuBtn.data('direction');
-  var menuType    = $menuBtn.data('type');
   var backdrop    = '<div class="bsPushNav-backdrop"></div>';
   var pluginName  = 'bsPushNav';
   var defaults    = {
-                    breakpoint: (breakpoint) ? breakpoint : 768,
-                    typeClass: (menuType) ? menuType : 'slide',
-                    direction: (menuDir) ? menuDir : 'left',
-                    targetsList: [],
-                    templates: {},
-                    bodyWrapper: '#wrapper'
-                  };
+                      breakpoint: 768,
+                      typeClass: 'slide',
+                      direction: 'left',
+                      targetsList: [],
+                      templates: {},
+                      bodyWrapper: '#wrapper'
+                    };
 
   // define the plugin constructor
   function Plugin(element, options){
@@ -57,10 +53,12 @@
     // do the logic
     this.getLists.call(this);
     this.bindResize.call(this);
+
+    if(this.options.typeClass === 'push'){
+      $('body').addClass('anim');
+    }
+
     if(this.checkWidth.call(this)) {
-      if(this.options.typeClass === 'push'){
-        $('body').addClass('anim');
-      }
       this.addTemp.call(this);
     }
     this.bindClick.call(this);
@@ -119,9 +117,8 @@
     var $element = $(this.element);
     $('.bsPushNav-backdrop, ' + $element.data('control')).remove();
     $('body').removeClass('pn-' + this.options.typeClass + '-' + this.options.direction);
-
     for(var temp in temps){
-      if($(temps[temp].id).length === 0){
+      if($('#' + temp).length === 0){
         $(temps[temp].parent).append(temps[temp].template);
       }
     }
@@ -252,4 +249,21 @@
       return returns !== undefined ? returns : this;
     }
   };
+
+  // call the plugin on data attributes
+  $(document).ready(function() {
+    var $menuBtn = $('[data-toggle="bsPushNav"]');
+    $menuBtn.each(function(){
+      var $self = $(this);
+      var mOpt = {};
+      // set options
+      if($self.data('target')) { mOpt.targetsList = $self.data('target').split(' '); }
+      if($self.data('direction')) {mOpt.direction = $self.data('direction'); }
+      if($self.data('breakpoint')) {mOpt.breakpoint = $self.data('breakpoint'); }
+      if($self.data('type')) {mOpt.typeClass = $self.data('type'); }
+      if($self.data('wrapper')) {mOpt.bodyWrapper = $self.data('wrapper'); }
+
+      $self.bsPushNav(mOpt);
+    });
+  });
 })(jQuery, window, document);
