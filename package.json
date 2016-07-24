@@ -40,5 +40,6 @@
             ]
         }
     },
+    "name": "bs-push-nav",
     "version": "0.0.5"
 }
