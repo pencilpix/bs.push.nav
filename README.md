@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/pencilpix/bs.push.nav.svg?branch=develop)](https://travis-ci.org/pencilpix/bs.push.nav)
 ### bs.push.nav
 JQuery plugin depend on bootstrap navigation to convert it into a push/slide menu for small screen widths
 
